@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <section className='home'>
       <div className='homebanner'
-      style={{ background: `URL(https://demo.deity.io/static/media/hero-img-01.a6e05efb.jpg)`}}></div>
+      style={{ background: `URL(${process.env.PUBLIC_URL + '/media/homebanner.jpg'})`}}></div>
       home
     </section>
   );
