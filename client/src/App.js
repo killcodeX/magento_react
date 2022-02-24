@@ -1,12 +1,20 @@
 import "./App.css";
-import Products from "./components/products";
+import { Routes, Route, useLocation, Redirect } from "react-router-dom";
+import Header from "./components/header";
+import Footer from "./components/footer";
+import Home from "./components/home";
 
 function App() {
+  const location = useLocation();
+
   return (
-    <div className="App">
-      <h2>My first Apollo app 🚀</h2>
-      <Products/>
-    </div>
+    <>
+      {location.pathname !== "/" ? <Header /> : null}
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+      </Routes>
+      <Footer />
+    </>
   );
 }
 
