@@ -1,0 +1,21 @@
+/* home header */
+
+.home-header{
+    height: 70px;
+    background-color: #f2f2f2f5;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.header-lists{
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-lists a{
+    color: black;
+    text-decoration: none;
+    font-weight: 600;
+}
