@@ -8,6 +8,11 @@
   height: 200px;
   overflow: hidden;
   margin-bottom: 20px;
+  transition: 0.5ms all;
+}
+
+.upper-section:hover{
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .upper-section img {

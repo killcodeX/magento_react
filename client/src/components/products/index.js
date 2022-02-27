@@ -27,6 +27,7 @@ export default function Products() {
             <div className="col-md-3 mb-2" key={item.id}>
               <div className="product-container">
                 <div className="upper-section">
+                  <a href={`products/${item.sku}`}>
                   <img
                     src={
                       item?.image
@@ -35,6 +36,7 @@ export default function Products() {
                     }
                     alt="products"
                   />
+                  </a>
                 </div>
                 <div className="lower-section">
                   <div className="product-categories">
