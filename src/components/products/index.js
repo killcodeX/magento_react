@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { PRODUCTS_MAGENTO } from "../../graphql/productQueries";
+import { Spin } from "antd";
 import "./products.css";
 
 export default function Products() {
@@ -16,7 +17,12 @@ export default function Products() {
     }
   }, [data]);
 
-  if (loading) return <p>Loading....</p>;
+  if (loading)
+    return (
+      <section>
+        <Spin size="large" />
+      </section>
+    );
 
   if (error) return <p>Error</p>;
   return (
@@ -28,14 +34,14 @@ export default function Products() {
               <div className="product-container">
                 <div className="upper-section">
                   <a href={`products/${item.sku}`}>
-                  <img
-                    src={
-                      item?.image
-                        ? item.image.url
-                        : "https://dev-d2c.upscalio.com/pub/media/catalog/product/cache/c2437caef9429815de44d4cbc4080d7e/1/_/1_d7dcf5f9-73df-44bf-a6cd-b8ea5938aecc_960x.jpeg"
-                    }
-                    alt="products"
-                  />
+                    <img
+                      src={
+                        item?.image
+                          ? item.image.url
+                          : "https://dev-d2c.upscalio.com/pub/media/catalog/product/cache/c2437caef9429815de44d4cbc4080d7e/1/_/1_d7dcf5f9-73df-44bf-a6cd-b8ea5938aecc_960x.jpeg"
+                      }
+                      alt="products"
+                    />
                   </a>
                 </div>
                 <div className="lower-section">
@@ -45,7 +51,9 @@ export default function Products() {
                     })}
                   </div>
                   <p className="product-name">{item.name}</p>
-                  <p className="product-price">$ {item.price_range.minimum_price.final_price.value}</p>
+                  <p className="product-price">
+                    $ {item.price_range.minimum_price.final_price.value}
+                  </p>
                 </div>
               </div>
             </div>

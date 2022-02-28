@@ -51,6 +51,9 @@ export const SINGLE_PRODUCTS_MAGENTO = gql`
             }
           }
         }
+        description {
+          html
+        }
         rating_summary
         amazon_link
         flipkart_link
