@@ -7,9 +7,9 @@ export default function Header() {
   const [categories, setCategories] = useState(null);
 
   useEffect(() => {
-    console.log("from graphql api `data`-->>", data);
-    console.log("from graphql api `error`-->>", JSON.stringify(error, null, 2));
-    console.log("from graphql api `loading`-->>", loading);
+    // console.log("from graphql api `data`-->>", data);
+    // console.log("from graphql api `error`-->>", JSON.stringify(error, null, 2));
+    // console.log("from graphql api `loading`-->>", loading);
     if (data) {
       setCategories(data.categories.items[0].children);
     }
@@ -80,7 +80,6 @@ export default function Header() {
               </a>
             </li>
             {categories.map((item) => {
-              console.log(item)
               return (
                 <li className="nav-item" key={item.id}>
                   <a className="nav-link" href={`/categories/${item.name.split(" ").join("-").toLowerCase()}/${item.id}`}>
