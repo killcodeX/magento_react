@@ -2,10 +2,22 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Categories_Products } from "../../graphql/categoryQueries";
 import { useQuery } from "@apollo/client";
-import { Slider, Select, Spin } from "antd";
+import { Slider, Select, Spin, Checkbox } from "antd";
 import "./categoryPage.css";
 
 const { Option } = Select;
+
+const options = [
+  { label: "Black", value: "black" },
+  { label: "Grey", value: "grey" },
+  { label: "Brown", value: "brown" },
+  { label: "White", value: "white" },
+  { label: "Navy Blue", value: "navy blue" },
+  { label: "Blue", value: "blue" },
+  { label: "Beige", value: "Beige" },
+  { label: "Gold", value: "gold" },
+  { label: "Red", value: "red" },
+];
 
 export default function CategoryPage() {
   const params = useParams();
@@ -33,7 +45,7 @@ export default function CategoryPage() {
   if (error)
     return <section className="product-page bg-light">Error...</section>;
 
-  const handleChange = (value) => {
+  const handleChangeSort = (value) => {
     if (value == "lth") {
       let result = products.slice().sort((a, b) => {
         return (
@@ -55,11 +67,15 @@ export default function CategoryPage() {
     }
   };
 
+  function onChangeCheck(checkedValues) {
+    console.log("checked = ", checkedValues);
+  }
+
   return (
     <section className="product-page">
       <div className="container">
         <div className="row">
-          <div className="col-md-12 pb-4">
+          <div className="col-md-12">
             <div className="categorypage-head">
               <div className="categorypage-breadcrumbs p-2">
                 HOME / SHOP /{" "}
@@ -72,7 +88,7 @@ export default function CategoryPage() {
                 <div className="sorting">
                   <Select
                     defaultValue="Default sorting"
-                    onChange={handleChange}
+                    onChange={handleChangeSort}
                   >
                     <Option value="lth">Sort by price: low to high</Option>
                     <Option value="htl">Sort by price: high to low</Option>
@@ -81,16 +97,23 @@ export default function CategoryPage() {
               </div>
             </div>
           </div>
-          <div className="col-md-3">
+          <div className="col-md-3 border-right p-4">
             <div className="categorypage-filter">
               <h2>Filters</h2>
-              <div className="filters">
+              <div className="slide-filters">
                 <p>Filter By Price:</p>
                 <Slider defaultValue={30} />
               </div>
+              <div className="select-filters">
+                <p>Filter By Color:</p>
+                <Checkbox.Group
+                  options={options}
+                  onChange={onChangeCheck}
+                />
+              </div>
             </div>
           </div>
-          <div className="col-md-9">
+          <div className="col-md-9 p-4">
             <div className="row">
               {products?.map((item) => {
                 return (
