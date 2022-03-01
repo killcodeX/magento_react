@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Categories_Products } from "../../graphql/categoryQueries";
 import { useQuery } from "@apollo/client";
-import { Select, Spin } from "antd";
+import { Slider, Select, Spin } from "antd";
 import "./categoryPage.css";
 
 const { Option } = Select;
@@ -37,19 +37,21 @@ export default function CategoryPage() {
     if (value == "lth") {
       let result = products.slice().sort((a, b) => {
         return (
-          a.price_range.minimum_price.regular_price.value - b.price_range.minimum_price.regular_price.value
+          a.price_range.minimum_price.regular_price.value -
+          b.price_range.minimum_price.regular_price.value
         );
       });
-      setProducts(result)
+      setProducts(result);
     }
 
     if (value == "htl") {
       let result = products.slice().sort((a, b) => {
         return (
-          b.price_range.minimum_price.regular_price.value - a.price_range.minimum_price.regular_price.value
+          b.price_range.minimum_price.regular_price.value -
+          a.price_range.minimum_price.regular_price.value
         );
       });
-      setProducts(result)
+      setProducts(result);
     }
   };
 
@@ -79,7 +81,15 @@ export default function CategoryPage() {
               </div>
             </div>
           </div>
-          <div className="col-md-3">CategoryPage</div>
+          <div className="col-md-3">
+            <div className="categorypage-filter">
+              <h2>Filters</h2>
+              <div className="filters">
+                <p>Filter By Price:</p>
+                <Slider defaultValue={30} />
+              </div>
+            </div>
+          </div>
           <div className="col-md-9">
             <div className="row">
               {products?.map((item) => {
@@ -87,7 +97,7 @@ export default function CategoryPage() {
                   <div className="col-md-4 mb-2" key={item.id}>
                     <div className="product-container">
                       <div className="upper-section">
-                        <a href={`products/${item.sku}`}>
+                        <a href={`/products/${item.sku}`}>
                           <img
                             src={
                               item?.image
